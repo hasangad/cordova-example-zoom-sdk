@@ -16,10 +16,23 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var appToken = "SET YOUR TOKEN HERE";
+var userId = "sampleUserId";
+var encryptionSecret = "some secret data";
+
+var enrollButton = null;
+var authButton = null;
+
 var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+    },
+
+    updateAuthButtonState: function() {
+        ZoomAuthentication.isUserEnrolled(userId, function(isEnrolled) {
+            authButton.disabled = !isEnrolled;
+        });
     },
 
     // deviceready Event Handler
@@ -27,20 +40,67 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        this.receivedEvent('deviceready');
+        enrollButton = document.getElementById("enrollButton");
+        enrollButton.addEventListener("click", this.onEnrollClick.bind(this));
+        
+        authButton = document.getElementById("authButton");
+        authButton.addEventListener("click", this.onAuthClick.bind(this));
+    
+        if (typeof ZoomAuthentication !== 'undefined') {
+            ZoomAuthentication.initialize(appToken, this.onZoomInitializeSuccess.bind(this), this.onError.bind(this));
+        }
+        else {
+            alert("ZoOm plugin not available.");
+        }
     },
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+  /* Zoom Events */
+    onZoomInitializeSuccess: function(success) {
+        enrollButton.disabled = false;
+        this.updateAuthButtonState();
+        ZoomAuthentication.getVersion(function(v) {
+            var versionElement = document.getElementById("version");
+            versionElement.innerText = "SDK Version " + v;
+            versionElement.setAttribute('style', 'display:block');
+        }, this.onError.bind(this));
+    },
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    onZoomInitializeError: function(message) {
+        this.onError("Zoom initalize failed: " + message);
+    },
 
-        console.log('Received Event: ' + id);
-    }
+    onZoomEnrollFinish: function(result) {
+        if (result.status == "Enrolled") {
+            authButton.disabled = false;
+        }
+        else {
+            authButton.disabled = true;
+        }
+        this.updateAuthButtonState();
+    },
+
+    onZoomAuthFinish: function(result) {
+        this.updateAuthButtonState();
+        alert(JSON.stringify(result));
+    },
+
+    onError: function(message) {
+        if (message) {
+            alert("Error: " + message);
+        }
+        else {
+            alert("Unknown error");
+        }
+    },
+
+  /* Click Events */
+    onEnrollClick: function() {
+        ZoomAuthentication.enroll(userId, encryptionSecret, this.onZoomEnrollFinish.bind(this), this.onError.bind(this));
+    },
+
+    onAuthClick: function() {
+        ZoomAuthentication.authenticate(userId, encryptionSecret, this.onZoomAuthFinish.bind(this), this.onError.bind(this));
+    },
 };
 
 app.initialize();
