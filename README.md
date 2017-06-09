@@ -2,6 +2,10 @@ ZoOm SDK Cordova Example
 ------------------------
 This application provides a simple example for using the ZoOm SDK Cordova plugin.  
 
+Preparing the Sample App
+------------------------
+Before the app can be built correctly, all platform dependencies must be updated by running `cordova platform update android' and `cordova platform update ios' from the command line while in the project directory.
+
 Installing the Plugin
 ---------------------
 After cloning this project, the ZoOm plugin must first be installed by running `cordova plugin add https://github.com/facetec/cordova-plugin-zoom-sdk` from the command line.  For more details about the plugin, [see here](https://github.com/facetec/cordova-plugin-zoom-sdk).
