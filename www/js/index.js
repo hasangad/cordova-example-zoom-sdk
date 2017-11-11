@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var appToken = "SET YOUR TOKEN HERE";
+var appToken = "dyGvvFAeOCHXXKKMR5oj4cQ6GHkYb5v1";
 var userId = "sampleUserId";
 var encryptionSecret = "some secret data";
 
