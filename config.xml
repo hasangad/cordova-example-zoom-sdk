@@ -24,5 +24,6 @@
     </platform>
     <preference name="android-minSdkVersion" value="18" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
+    <plugin name="https://github.com/facetec/cordova-plugin-zoom-sdk" tools:overrideLibrary="com.facetec.zoom.sdk" />
 </widget>
 
