@@ -13,7 +13,7 @@
         FaceTec, Inc
     </author>
         
- <preference name="android-minSdkVersion" value="14" />
+ <preference name="android-minSdkVersion" value="15" />
         
     <content src="index.html" />
     <access origin="*" />
@@ -37,6 +37,6 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
 </widget>
 
-  <config-file platform="android" parent="/manifest">
+  <!--<config-file platform="android" parent="/manifest">
     <uses-sdk tools:overrideLibrary="org.apache.cordova,com.library.plugin" />
-</config-file>
+</config-file>-->
