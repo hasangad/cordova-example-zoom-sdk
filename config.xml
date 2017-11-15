@@ -12,9 +12,9 @@
         FaceTec, Inc
     </author>
         
-      <!--  <config-file platform="android" parent="/manifest">-->
+      <!--  <config-file platform="android" parent="/manifest">
     <uses-sdk tools:overrideLibrary="org.apache.cordova,com.library.plugin" />
-</config-file>
+</config-file>-->
         
         <preference name="android-minSdkVersion" value="14" />
         
