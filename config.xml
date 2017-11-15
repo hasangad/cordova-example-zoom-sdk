@@ -11,6 +11,11 @@
     <author email="dev@cordova.apache.org" href="http://dev.zoomlogin.com">
         FaceTec, Inc
     </author>
+        
+        <config-file platform="android" parent="/manifest">
+    <uses-sdk tools:overrideLibrary="org.apache.cordova,com.library.plugin" />
+</config-file>
+        
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
