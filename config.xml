@@ -12,6 +12,7 @@
     <author email="dev@cordova.apache.org" href="http://dev.zoomlogin.com">
         FaceTec, Inc
     </author>
+        
  <preference name="android-minSdkVersion" value="14" />
         
     <content src="index.html" />
